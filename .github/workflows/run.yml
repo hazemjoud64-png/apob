@@ -1,0 +1,20 @@
+name: Run Script
+
+on:
+  workflow_dispatch: # لتشغيل الأداة يدوياً بضغطة زر
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build with Makefile
+        run: |
+          make
+
+      - name: Execute Script
+        run: |
+          # تشغيل البرنامج لمدة 60 ثانية (أو غير الرقم حسب الحاجة) مع تمرير عدد الخيوط
+          timeout 60 ./attack 300 || true
